@@ -62,6 +62,8 @@ Additionally, you *may* wish to change the following:
 
 Finally, it's not necessary in most common use scenarios, but if for some reason you wish to change the configuration of the Apache virtual host or the MySQL configuration for the root user, you can find the templates used to generate those configuration files in the `templates` subdirectory.
 
+If you wish to modify or extend the basic logic that provisions the system -- add new packages, say -- all that logic is in the file `setup.yml`. This file is an Ansible "playbook," so you can make use of any of Ansible's modules or features there. For more information on how to work with Ansible playbooks, refer to their ["Intro to Playbooks"](http://www.ansibleworks.com/docs/playbooks.html) document. [A complete reference of all modules available within an Ansible playbook](http://www.ansibleworks.com/docs/modules.html) is also available.
+
 ## License
 
 These files are copyright 2013, Jason Lefkowitz.
