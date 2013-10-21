@@ -1,0 +1,78 @@
+---
+- hosts: vagrant
+  user: vagrant
+  sudo: yes
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: install unzip
+      apt: pkg=unzip state=latest
+    - name: install apache
+      apt: pkg=apache2 state=latest
+    - name: activate mod_rewrite
+      command: a2enmod rewrite
+    - name: install MySQL client
+      apt: pkg=mysql-client state=latest
+    - name: install MySQL server
+      apt: pkg=mysql-server state=latest
+    - name: install Python MySQLdb package
+      apt: pkg=python-mysqldb state=latest
+    - name: start MySQL service
+      service: name=mysql state=started
+    - name: setup MySQL root password
+      mysql_user: name=root password=mysql host=$item state=present
+      with_items:
+        - $ansible_hostname
+        - 127.0.0.1
+        - ::1
+        - localhost
+    - name: setup MySQL creds for root user
+      template: src={{ mysqlTemplatePath }} dest=/root/.my.cnf owner=root mode=0600
+    - name: delete blank MySQL users
+      mysql_user: name="" host=$item state=absent
+      with_items:
+        - $ansible_hostname
+        - 127.0.0.1
+        - ::1
+        - localhost
+    - name: drop MySQL test database
+      mysql_db: name=test state=absent
+    - name: setup empty database for WordPress
+      mysql_db: name=wordpress encoding=utf8 collation=utf8_general_ci state=present login_user=root login_password=mysql
+    - name: setup MySQL user for WordPress
+      mysql_user: name=user_wp password=wordpress host=localhost priv=wordpress.*:ALL state=present
+    - name: install PHP
+      apt: pkg=$item state=latest
+      with_items:
+        - php5
+        - php5-cli
+        - php5-mysql
+        - php5-curl
+        - php5-gd
+        - php5-sqlite
+        - php5-xmlrpc
+        - php5-imagick
+        - php5-xcache
+        - php5-mysql
+    - name: install mod_php
+      apt: pkg=libapache2-mod-php5 state=latest
+    - name: put vagrant user in www-data group
+      user: name=vagrant groups=www-data append=yes
+    - name: make directory for wordpress
+      file: path=/var/www/wordpress state=directory owner=www-data group=www-data mode=0755
+    - name: download WordPress
+      get_url: url=http://wordpress.org/latest.zip dest=/tmp/
+    - name: unzip WordPress
+      command: unzip /tmp/latest.zip -d /tmp/
+    - name: set WordPress file permissions correctly
+      file: path=/tmp/wordpress state=directory recurse=yes owner=www-data group=www-data mode=0775
+    - name: move WordPress files to web root
+      command: mv /tmp/wordpress /var/www/
+    - name: copy virtual host setup over
+      template: src={{ vhostTemplatePath }} dest=/etc/apache2/sites-available/
+    - name: activate virtual host
+      command: a2ensite vhost
+    - name: deactivate default vhost
+      command: a2dissite default
+    - name: ensure apache is running
+      service: name=apache2 state=restarted
