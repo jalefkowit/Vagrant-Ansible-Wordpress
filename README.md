@@ -10,9 +10,9 @@ To make use of these files, you'll need to have the following prerequisites inst
 * [Vagrant](http://www.vagrantup.com/)
 * [Ansible](http://www.ansibleworks.com)
 
-You will also need a Vagrant "box" file -- a canned image of a base system that Vagrant can use as the starting point for further customization. These scripts have been tested and verified working with the official Vagrant image distributed by Ubuntu of the 32-bit version of Ubuntu 12.04 LTS "Precise Pangolin." As of this writing (October 21, 2013) that file is [distributed here](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box). If that URL does not work, check [cloud-images.ubuntu.com/vagrant](http://cloud-images.ubuntu.com) to find the URL of a box using the version of Ubuntu you wish to use.
+You will also need a Vagrant "box" file -- a canned image of a base system that Vagrant can use as the starting point for further customization. These scripts have been tested and verified working with the official Vagrant image distributed by Ubuntu of the 32-bit version of Ubuntu 12.04 LTS "Precise Pangolin." As of this writing (October 21, 2013) that file is [distributed here](http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box). If that URL does not work, check [cloud-images.ubuntu.com/vagrant](http://cloud-images.ubuntu.com) to find the URL of a box using the version of Ubuntu you wish to use. Base boxes with more than just a clean Ubuntu install or using other operating systems can be found at [vagrantbox.es](http://www.vagrantbox.es/).
 
-Note that these scripts rely on the apt packaging system, so they will only work fully on Debian Linux, Ubuntu, or other Debian-derived distributions that use apt. If you use Red Hat or another distribution that uses a different package manager, consult the Ansible documentation for instructions on how to modify the setup.yml file to change the apt commands to those for your particular package manager.
+Note that these scripts were designed for use with Ubuntu, so they make use of the apt packaging manager and other conventions Debian-derived distributions share (filesystem locations, configuration file structure, etc.). This means they will only work properly out of the box with Debian Linux or Debian-derived distributions such as Ubuntu. If you use Red Hat/CentOS/Fedora, or another distribution that uses a different package manager, consult the Ansible documentation for instructions on how to modify the setup.yml file to change the apt commands to those for your particular package manager and modify file locations so they map to the appropriate places for your distro.
 
 ## What It Does
 
@@ -48,9 +48,7 @@ Then just run the command `vagrant up` and your VM should bootstrap itself into 
 
 ## Customization/Configuration
 
-To begin, create an empty directory and clone the files in this repository into it.
-
-Next, in the file named `Vagrantfile`, you *must* change the following:
+In the file named `Vagrantfile`, you *must* change the following:
 
 * The value of `config.vm.box` must be changed from `precise32` to whatever handle you gave the Vagrant "box" you wish to use as your base system when you installed it via `vagrant add`
 
