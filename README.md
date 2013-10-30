@@ -42,11 +42,11 @@ To begin, create an empty directory and clone the files in this repository into 
 
 Next, you'll want to add your base Vagrant box to the list of boxes registered on your system, if you haven't already. That's just a matter of one command:
 
-    vagrant box add <box URL> <box handle>
+    vagrant box add <box handle> <box URL>
 
 ... where "box URL" is the URL to the box you want to use, and "box handle" is a string you choose to identify the box when using it. So to use the 32-bit Ubuntu 12.04 "Precise Pangolin" image cited in "Prerequisites" above with the handle "precise32", you'd enter:
 
-    vagrant box add http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box precise32
+    vagrant box add precise32 http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box
 
 Then, change the value of `config.vm.box` in the file named `Vagrantfile` to the handle you assigned to the Vagrant box you wish to use -- either the one you added above, or one you've already registered on your system.
 
