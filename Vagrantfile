@@ -12,5 +12,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "setup.yml"
     ansible.inventory_path = "vagrant-inventory"
     ansible.host_key_checking = "false"
+    ansible.limit = "all"
   end
 end
