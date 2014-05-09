@@ -2,5 +2,5 @@
 192.168.50.50
 
 [vagrant:vars]
-vhostTemplatePath=templates/vhost
+vhostTemplatePath=templates/vhost.conf
 mysqlTemplatePath=templates/mysql
