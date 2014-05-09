@@ -73,6 +73,6 @@
     - name: activate virtual host
       command: a2ensite vhost
     - name: deactivate default vhost
-      command: a2dissite default
+      command: a2dissite 000-default
     - name: ensure apache is running
       service: name=apache2 state=restarted
