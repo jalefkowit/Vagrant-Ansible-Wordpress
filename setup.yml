@@ -63,7 +63,7 @@
     - name: download WordPress
       get_url: url=http://wordpress.org/latest.zip dest=/tmp/
     - name: unzip WordPress
-      command: unzip /tmp/latest.zip -d /tmp creates=/var/www/wordpress
+      command: unzip /tmp/latest.zip -d /tmp creates=/var/www/wordpress/readme.html
     - name: move WordPress files to web root
       shell: mv /tmp/wordpress/* /var/www/wordpress/ creates=/var/www/wordpress/readme.html
     - name: set WordPress file permissions correctly
