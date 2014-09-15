@@ -38,7 +38,7 @@
     - name: drop MySQL test database
       mysql_db: name=test state=absent
     - name: setup empty database for WordPress
-      mysql_db: name=wordpress encoding=utf8 collation=utf8_general_ci state=present login_user=root login_password=mysql
+      mysql_db: name=wordpress encoding=utf8 collation=utf8_unicode_ci state=present login_user=root login_password=mysql
     - name: setup MySQL user for WordPress
       mysql_user: name=user_wp password=wordpress host=localhost priv=wordpress.*:ALL state=present
     - name: install PHP
