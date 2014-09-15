@@ -1,4 +1,4 @@
-# Throwaway WordPress VMs with Vagrant and Ansible
+# Easy WordPress VMs with Vagrant and Ansible
 
 This bundle of files automates the process of automatically creating and provisioning local virtual machines with a complete, running instance of WordPress. Such things are useful for local development and testing things like plugins and themes on a "clean" WordPress install.
 
@@ -30,7 +30,7 @@ Together with the prerequisites listed above, the scripts contained herein will 
     * php5-xcache
     * php5-xmlrpc
 * Downloads the latest copy of the WordPress software and installs it at `/var/www/wordpress`
-* Has a MySQL database and database user for WordPress to make use of
+* Has a MySQL database (name: "wordpress") and database user (name: "user_wp"; password: "wordpress") for WordPress to make use of
 * Has a configuration file in `/root/.my.cnf` to allow the root user to log into MySQL as root without needing to enter a username or password
 * Has an Apache virtual host configured and enabled to serve WordPress
 
