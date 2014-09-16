@@ -14,4 +14,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.host_key_checking = "false"
     ansible.limit = "all"
   end
+  config.vm.synced_folder ".", "/vagrant", owner:"www-data", group:"www-data", mount_options:["dmode=775", "fmode=775"]
 end

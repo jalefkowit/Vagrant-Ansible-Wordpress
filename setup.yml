@@ -58,16 +58,10 @@
       apt: pkg=libapache2-mod-php5 state=latest
     - name: put vagrant user in www-data group
       user: name=vagrant groups=www-data append=yes
-    - name: make directory for wordpress
-      file: path=/var/www/wordpress state=directory owner=www-data group=www-data mode=0755
-    - name: download WordPress
-      get_url: url=http://wordpress.org/latest.zip dest=/tmp/
     - name: unzip WordPress
-      command: unzip /tmp/latest.zip -d /tmp creates=/var/www/wordpress/readme.html
-    - name: move WordPress files to web root
-      shell: mv /tmp/wordpress/* /var/www/wordpress/ creates=/var/www/wordpress/readme.html
-    - name: set WordPress file permissions correctly
-      file: path=/var/www/wordpress state=directory recurse=yes owner=www-data group=www-data mode=0775
+      unarchive: src=wordpress.zip dest=/vagrant/
+    - name: symlink web root to unzipped WordPress
+      file: src=/vagrant/wordpress dest=/var/www/wordpress state=link 
     - name: copy virtual host setup over
       template: src={{ vhostTemplatePath }} dest=/etc/apache2/sites-available/
     - name: activate virtual host
