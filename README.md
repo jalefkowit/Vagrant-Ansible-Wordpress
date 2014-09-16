@@ -29,7 +29,7 @@ Together with the prerequisites listed above, the scripts contained herein will 
     * php5-sqlite
     * php5-xcache
     * php5-xmlrpc
-* Downloads the latest copy of the WordPress software and installs it at `/var/www/wordpress`
+* Installs the latest version of the WordPress software in /vagrant, so you can work with local files via your favorite editor/IDE; sets up symlink to it at /var/www/wordpress`so Apache can find it
 * Has a MySQL database (name: "wordpress") and database user (name: "user_wp"; password: "wordpress") for WordPress to make use of
 * Has a configuration file in `/root/.my.cnf` to allow the root user to log into MySQL as root without needing to enter a username or password
 * Has an Apache virtual host configured and enabled to serve WordPress
