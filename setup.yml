@@ -39,6 +39,13 @@
         state: started
         enabled: yes
 
+    - name: Setup MySQL creds for root user
+      template:
+        src: "{{ mysqlTemplatePath }}"
+        dest: "/root/.my.cnf"
+        owner: "root"
+        mode: 0600
+
     - name: Setup MySQL root password
       mysql_user:
         name: "root"
@@ -50,13 +57,6 @@
         - 127.0.0.1
         - ::1
         - localhost
-
-    - name: Setup MySQL creds for root user
-      template:
-        src: "{{ mysqlTemplatePath }}"
-        dest: "/root/.my.cnf"
-        owner: "root"
-        mode: 0600
 
     - name: Delete blank MySQL users
       mysql_user:
