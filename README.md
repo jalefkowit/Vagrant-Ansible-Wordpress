@@ -8,7 +8,7 @@ To make use of these files, you'll need to have the following prerequisites inst
 
 * [VirtualBox](https://www.virtualbox.org/)
 * [Vagrant](http://www.vagrantup.com/)
-* [Ansible](http://www.ansibleworks.com)
+* [Ansible](https://www.ansible.com/)
 
 Any Vagrant-based VM needs to start with a Vagrant "box" file -- a canned image of a base system that Vagrant can use as the starting point for further customization. **By default, these scripts use the official Vagrant image distributed by Ubuntu of the 64-bit version of Ubuntu 14.04 LTS, "Trusty Tahr," so you do not need to download or install anything further if you are satisfied with that version.** As of this writing (September 16, 2014) that file is [distributed here](https://vagrantcloud.com/ubuntu/boxes/trusty64).
 
@@ -31,6 +31,7 @@ Together with the prerequisites listed above, the scripts contained herein will 
     * php5-sqlite
     * php5-xcache
     * php5-xmlrpc
+    * php5-xdebug (ready for remote debugging on port 10000; use the IDE key "vagrant")
 * Installs the latest version of the WordPress software in /vagrant, so you can work with local files via your favorite editor/IDE; sets up symlink to it at /var/www/wordpress`so Apache can find it
 * Has a MySQL database (name: "wordpress") and database user (name: "user_wp"; password: "wordpress") for WordPress to make use of
 * Has a configuration file in `/root/.my.cnf` to allow the root user to log into MySQL as root without needing to enter a username or password
@@ -56,7 +57,7 @@ Then just run the command `vagrant up` and your VM should bootstrap itself into 
 
 Finally, it's not necessary in most common use scenarios, but if for some reason you wish to change the configuration of the Apache virtual host or the MySQL configuration for the root user, you can find the templates used to generate those configuration files in the `templates` subdirectory.
 
-If you wish to modify or extend the basic logic that provisions the system -- add new packages, say -- all that logic is in the file `setup.yml`. This file is an Ansible "playbook," so you can make use of any of Ansible's modules or features there. For more information on how to work with Ansible playbooks, refer to their ["Intro to Playbooks"](http://www.ansibleworks.com/docs/playbooks.html) document. [A complete reference of all modules available within an Ansible playbook](http://www.ansibleworks.com/docs/modules.html) is also available.
+If you wish to modify or extend the basic logic that provisions the system -- add new packages, say -- all that logic is in the file `setup.yml`. This file is an Ansible "playbook," so you can make use of any of Ansible's modules or features there. For more information on how to work with Ansible playbooks, refer to their ["Intro to Playbooks"](http://docs.ansible.com/ansible/playbooks_intro.html) document. [A complete reference of all modules available within an Ansible playbook](http://docs.ansible.com/ansible/modules_by_category.html) is also available.
 
 ## License
 
