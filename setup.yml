@@ -23,6 +23,7 @@
         - php5-imagick
         - php5-mysql
         - php5-xmlrpc
+        - php5-xdebug
 
     - name: Install Apache and its modules
       apt: pkg={{ item }} state=latest
@@ -94,6 +95,11 @@
         name: "vagrant"
         groups: "www-data"
         append: yes
+
+    - name: Set up XDebug for remote debugging
+      template:
+        src: "{{ xdebugTemplatePath }}"
+        dest: /etc/php5/apache2/conf.d/xdebug-remote-debugging.ini       
 
     - name: Unzip WordPress
       unarchive: src=wordpress.zip dest=/vagrant/

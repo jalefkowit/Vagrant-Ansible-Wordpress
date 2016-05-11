@@ -4,3 +4,4 @@
 [vagrant:vars]
 vhostTemplatePath=templates/vhost.conf
 mysqlTemplatePath=templates/mysql
+xdebugTemplatePath=templates/xdebug
