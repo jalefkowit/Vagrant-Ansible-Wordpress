@@ -32,7 +32,9 @@
         - libapache2-mod-php5
 
     - name: Activate mod_rewrite
-      apache2_module: name=rewrite state=present
+      apache2_module: 
+        name: rewrite
+        state: present
 
     - name: Start MySQL service
       service:
@@ -71,7 +73,9 @@
         - localhost
 
     - name: Drop MySQL test database
-      mysql_db: name=test state=absent
+      mysql_db: 
+        name: test
+        state: absent
 
     - name: Setup empty database for WordPress
       mysql_db:
@@ -102,7 +106,9 @@
         dest: /etc/php5/apache2/conf.d/xdebug-remote-debugging.ini       
 
     - name: Unzip WordPress
-      unarchive: src=wordpress.zip dest=/vagrant/
+      unarchive: 
+        src: wordpress.zip 
+        dest: /vagrant/
 
     - name: Symlink web root to unzipped WordPress
       file:
@@ -111,7 +117,9 @@
         state: "link"
 
     - name: Copy virtual host setup over
-      template: src={{ vhostTemplatePath }} dest=/etc/apache2/sites-available/
+      template: 
+        src: "{{ vhostTemplatePath }}"
+        dest: /etc/apache2/sites-available/
 
     - name: Activate virtual host
       command: a2ensite vhost
@@ -120,4 +128,7 @@
       command: a2dissite 000-default
 
     - name: Ensure Apache is running
-      service: name=apache2 state=restarted enabled=yes
+      service: 
+        name: apache2 
+        state: restarted 
+        enabled: yes
