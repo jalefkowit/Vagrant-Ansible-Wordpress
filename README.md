@@ -2,6 +2,8 @@
 
 This bundle of files automates the process of automatically creating and provisioning local virtual machines with a complete, running instance of WordPress. Such things are useful for local development and testing things like plugins and themes on a "clean" WordPress install.
 
+**This package is deprecated. For an updated version based on Ubuntu 16.04 and PHP 7, get [VirtualPress](https://github.com/jalefkowit/virtualpress).**
+
 ## Prerequisites
 
 To make use of these files, you'll need to have the following prerequisites installed on your workstation:
